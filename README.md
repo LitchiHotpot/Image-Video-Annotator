@@ -61,14 +61,11 @@ python main.py
 
 ## Build a Windows EXE
 
-Double-click `build.bat`, or run manually:
+Just run **`build.bat`**. It produces a slim single-file `dist\Annotator.exe` (~85 MB).
 
-```bash
-pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed --name Annotator --collect-submodules cv2 main.py
-```
-
-The executable is produced at `dist\Annotator.exe`.
+To keep the exe small and the build reliable, `build.bat` automatically:
+- builds inside a **clean virtualenv** with headless OpenCV, so pip's small OpenBLAS numpy is bundled instead of Anaconda's huge MKL (~85 MB vs ~320 MB);
+- builds in an **ASCII temp folder**, because PyInstaller's Qt hook fails when the project path contains non-ASCII (e.g. Chinese) characters — the finished exe is copied back to `.\dist`.
 
 ## Export format
 
@@ -191,14 +188,11 @@ python main.py
 
 ## 打包为 EXE
 
-双击运行 `build.bat`，或手动执行：
+直接运行 **`build.bat`** 即可，生成精简的单文件 `dist\Annotator.exe`（约 85 MB）。
 
-```bash
-pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed --name Annotator --collect-submodules cv2 main.py
-```
-
-生成的可执行文件位于 `dist\Annotator.exe`。
+为了让 exe 更小、打包更稳，`build.bat` 会自动：
+- 在**干净的虚拟环境**里打包（用 headless OpenCV），从而打包 pip 的小体积 OpenBLAS 版 numpy，而不是 Anaconda 庞大的 MKL（约 85 MB，对比 ~320 MB）；
+- 在 **纯 ASCII 临时目录**里打包，因为当项目路径含非 ASCII（如中文）字符时，PyInstaller 的 Qt 钩子会失败——打包完成后再把 exe 复制回 `.\dist`。
 
 ## 导出格式
 

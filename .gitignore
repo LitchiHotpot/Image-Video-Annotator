@@ -10,6 +10,7 @@ env/
 build/
 dist/
 *.spec
+.build-venv/
 
 # Annotation outputs / data (don't commit user data or media)
 *_annotations.json
